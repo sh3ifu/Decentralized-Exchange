@@ -1,0 +1,47 @@
+Token:	0x49b8bA45320382ac15E049Bb319fe702DB78fACa
+Factory:	0x6d9d776397d4DfBdb07Bd0df84b7260Bf10C3ab0
+
+
+<div className="Pool">
+      <div className="createExchange">
+        <h3>Create exchange</h3>
+        <input
+          className="input-address"
+          onChange={(e) => setTokenAddress(e.target.value)}
+          value={tokenAddress}
+          placeholder="Token Address"
+        ></input>
+        <div class="button-group">
+          <button className="create-exchange" onClick={createExchange}>
+            Create Exchange
+          </button>
+          <button className="get-exchange" onClick={getExchange}>
+            Get Exchange
+          </button>
+        </div>
+      </div>
+
+      <div className="addLiquidity">
+        <h3>Add liquidity</h3>
+        <div className="inputs">
+          <input
+            onChange={(e) => setFDeposit(e.target.value)}
+            value={f_deposit}
+            placeholder="Deposit"
+          ></input>
+          <input
+            onChange={(e) => setSDeposit(e.target.value)}
+            value={s_deposit}
+            placeholder="Deposit estimated"
+          ></input>
+        </div>
+        <button className="addLiquidity" onClick={addLiquidity}>Add liquidity</button>
+        <button className="getReserve" onClick={getReserve}>Get reserve</button>
+        <button className="getTokenAmount" onClick={getTokenAmount}>Get token amount</button>
+        <button className="getEthAmount" onClick={getEthAmount}>Get eth amount</button>
+      </div>
+
+      <div className="removeLiquidity">
+        <h3>Remove liquidity</h3>
+      </div>
+    </div>

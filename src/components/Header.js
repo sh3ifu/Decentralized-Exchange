@@ -3,7 +3,6 @@ import Logo from "../galaxy_logo.png";
 import Eth from "../ethereum.png";
 import { Link } from "react-router-dom";
 import { ethers } from "ethers";
-// const ethers = require("ethers");
 
 function Header() {
   const [walletAddress, setWalletAddress] = useState("");
@@ -51,12 +50,18 @@ function Header() {
     <header>
       <div className="leftH">
         <img src={Logo} alt="logo" className="logo" />
-        <p>Galaxy Swap</p>
+        <h1 className="dex-name">Galaxy Swap</h1>
         <Link to="/" className="link">
           <div className="headerItem">Swap</div>
         </Link>
         <Link to="/pool" className="link">
           <div className="headerItem">Pool</div>
+        </Link>
+        <Link to="/staking" className="link">
+          <div className="headerItem">Staking</div>
+        </Link>
+        <Link to="/lottery" className="link">
+          <div className="headerItem">Lottery</div>
         </Link>
       </div>
 

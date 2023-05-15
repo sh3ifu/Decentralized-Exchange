@@ -1,6 +1,8 @@
 import Header from "./components/Header";
 import Swap from "./components/Swap";
 import Pool from "./components/Pool";
+import Staking from "./components/Staking";
+import Lottery from "./components/Lottery";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
@@ -12,6 +14,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Swap />} />
           <Route path="/pool" element={<Pool />} />
+          <Route path="/staking" element={<Staking />} />
+          <Route path="/lottery" element={<Lottery />} />
         </Routes>
       </div>      
     </div>

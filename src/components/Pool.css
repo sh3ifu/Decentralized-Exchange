@@ -1,0 +1,67 @@
+/* .createExchange, .addLiquidity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .input-address{
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+  
+  .button-group, .inputs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .create-exchange,
+  .get-exchange, .addLiquidity {
+    margin: 0 5px;
+  } */
+ 
+  .pool-control-btn {        
+    width: 120px;
+    height: 40px;
+    padding: 10px 25px;
+    border: 2px solid #5981F3;
+    color:#5981F3;
+    background: #3b4874;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    border-radius: 12px;
+  }
+
+  .pool-control-btn {
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .pool-control-btn:hover {
+    background: #3b4874;
+    color: #5982f39b;
+  }
+  .pool-control-btn:before {
+      position: absolute;
+      content: '';
+      display: inline-block;
+      top: -180px;
+      left: 0;
+      width: 30px;
+      height: 100%;
+      background-color: #fff;
+      animation: shiny-btn1 3s ease-in-out infinite;
+  }

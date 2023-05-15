@@ -69,6 +69,47 @@ header {
   color: #3b4874
 }
 
+
+
+
+
+@font-face {
+  font-family: 'Rocher';
+  src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
+}
+
+.dex-name {
+  font-family: 'Rocher';
+  text-align: center;
+  font-size: 25px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@font-palette-values --Grays {
+  font-family: Rocher;
+  base-palette: 9;
+}
+
+@font-palette-values --Purples {
+  font-family: Rocher;
+  base-palette: 6;
+}
+
+@font-palette-values --Mint {
+  font-family: Rocher;
+  base-palette: 7;
+}
+
+.dex-name {
+  font-palette: --Mint;
+}
+
+
+
 .mainWindow {
   margin-top: 40px;
   display: flex;
@@ -80,7 +121,7 @@ header {
   color: white;
 }
 
-.tradeBox {
+.tradeBox, .poolBox {
   width: 400px;
   background-color: #0E111B;
   border: 2px solid #21273a;
@@ -95,7 +136,7 @@ header {
 }
 
 
-.tradeBoxHeader {
+.tradeBoxHeader, .poolBoxHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -233,7 +274,6 @@ header {
 
 .modalContent {
   border-top: 1px solid #363e54;
-  /* padding-top: 20px; */
   margin-top: 20px;
   display: flex;
   flex-direction: column;
