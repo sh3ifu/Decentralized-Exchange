@@ -1,4 +1,5 @@
 const hre = require("hardhat");
+const fs = require('fs');
 
 async function deployContract(name, ...args) {
   const Contract = await hre.ethers.getContractFactory(name);
@@ -11,10 +12,16 @@ async function deployContract(name, ...args) {
   return contract.address;
 }
 
+function writeToFile(filename, data){
+  fs.writeFileSync(filename, JSON.stringify(data));
+}
+
 async function main() {
   const decimals = BigInt(10 ** 18);
-  const contractAAddress = await deployContract("Token", "GalaxyToken", "GXT", 10000n * decimals);  
-  // const contractAAddress = await deployContract("Factory");
+  const tokenContractAddress = await deployContract("Token", "Shiba Inu", "SHIB", 1000000n * decimals);
+  // const factoryContractAddress = await deployContract("Factory");
+
+  // writeToFile('./src/components/deployedContractsAddresses.json', { factoryContractAddress:  factoryContractAddress});
 }
 
 main().catch((error) => {

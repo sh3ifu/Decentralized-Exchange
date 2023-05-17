@@ -1,31 +1,25 @@
-/* .createExchange, .addLiquidity {
+
+  .input-red {
+    color: red !important;
+  }
+
+
+
+  .exchangeRate, .poolSize {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #D4DBE2;
   }
-  
-  h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
+  .poolInfo {
+    margin-top: 10px;
+    margin-bottom: 15px;
   }
-  
-  .input-address{
-    margin-bottom: 10px;
-    margin-right: 10px;
+
+  .assetOneBalance, .assetTwoBalance {
+    color: #D4DBE2;
   }
-  
-  .button-group, .inputs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-  }
-  
-  .create-exchange,
-  .get-exchange, .addLiquidity {
-    margin: 0 5px;
-  } */
- 
+
   .pool-control-btn {        
     width: 120px;
     height: 40px;

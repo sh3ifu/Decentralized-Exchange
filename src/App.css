@@ -72,7 +72,7 @@ header {
 
 
 
-
+/* Logo styles */
 @font-face {
   font-family: 'Rocher';
   src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
@@ -107,7 +107,7 @@ header {
 .dex-name {
   font-palette: --Mint;
 }
-
+/***************************/
 
 
 .mainWindow {
@@ -188,6 +188,18 @@ header {
   position: relative;
 }
 
+.assetOneBalance {
+  position: absolute;
+  min-width: 50px;
+  height: 25px;  
+  top: 5px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  padding-right: 8px;
+}
+
 .assetOne {
   position: absolute;
   min-width: 50px;
@@ -202,6 +214,19 @@ header {
   gap: 5px;
   font-weight: bold;
   font-size: 17px;
+  padding-right: 8px;
+  padding-left: 10px;
+}
+
+.assetTwoBalance{
+  position: absolute;
+  min-width: 50px;
+  height: 25px;  
+  top: 104px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
   padding-right: 8px;
 }
 
@@ -220,6 +245,7 @@ header {
   font-weight: bold;
   font-size: 17px;
   padding-right: 8px;
+  padding-left: 10px;
 }
 
 .assetOne:hover{
@@ -230,10 +256,10 @@ header {
   cursor: pointer;
 }
 
-.assetLogo {
+/* .assetLogo {
   height: 22px;
   margin-left: 5px;
-}
+} */
 
 .swapButton {
   display: flex;
@@ -266,11 +292,11 @@ header {
   cursor: pointer;
   background-color: #3b4874
 }
-
-.tokenLogo {
+/* 
+ .tokenLogo {
   height: 40px;
   width: 40px;
-}
+}  */
 
 .modalContent {
   border-top: 1px solid #363e54;
