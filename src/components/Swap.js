@@ -30,10 +30,14 @@ function Swap() {
   const [tokenAddressOne, setTokenAddressOne] = useState("");
   const [tokenAddressTwo, setTokenAddressTwo] = useState("");
   const [tokenAmount, setTokenAmount] = useState(0);
+  const [ethAmount, setEthAmount] = useState(0);
   const [tokenBalanceOne, setTokenBalanceOne] = useState(0);
   const [tokenBalanceTwo, setTokenBalanceTwo] = useState(0);
   const [contractTokenBalanceOne, setContractTokenBalanceOne] = useState(0);
   const [contractTokenBalanceTwo, setContractTokenBalanceTwo] = useState(0);
+  const [contractEthBalance, setContractEthBalance] = useState(0);
+  const [ethBalance, setEthBalance] = useState(0);
+  const [isEthSwap, setIsEthSwap] = useState(false);
 
   const settings = (
     <>
@@ -53,9 +57,12 @@ function Swap() {
 
   useEffect(() => {
     if (tokenAddressOne !== "") {
-      getTokenBalance(tokenAddressOne, 1);      
+      getTokenBalance(tokenAddressOne, 1);
       getReserve(tokenAddressOne, 1);
       getTokenToTokenPrice();
+      getContractEthBalance(tokenAddressOne);
+      getEthAmount(tokenAddressOne, "1");
+      getEthBalance();
     }
   }, [tokenAddressOne]);
 
@@ -109,13 +116,11 @@ function Swap() {
     setTokenAddressOne("");
     setTokenSymbolTwo("");
     setTokenAddressTwo("");
-    // setTokenBalance(0);
-    // setEthBalance(0);
-    // setTokenOneAmount("");
-    // setTokenTwoAmount("");
-    // setContractTokenBalance(0);
-    // setContractEthBalance(0);
-    // setTokensAmount(0);
+    setTokenOneAmount("");
+    setTokenTwoAmount("");
+    setContractEthBalance(0);
+    setTokenBalanceOne(0);
+    setTokenBalanceTwo(0);
   }
 
   function handleInputChange(event, inputId) {
@@ -123,26 +128,30 @@ function Swap() {
 
     if (inputId === 1) {
       setTokenOneAmount(value);
+      setIsEthSwap(false);
     } else {
       setTokenTwoAmount(value);
+      setIsEthSwap(true);
     }
 
     clearTimeout(timeoutId);
 
     if(selectedOption === "tokenToToken"){
-      const id = setTimeout(() => {
-        getTokenToTokenAmount(value, inputId);
+      const id = setTimeout(() => {        
+        if(tokenAddressOne !== "" || tokenAddressTwo !== "")
+          getTokenToTokenAmount(value, inputId);
       }, 1000);
 
       setTimeoutId(id);
     }
-    // else if(selectedOption === "removeLiquidity") {
-    //   const id = setTimeout(() => {
-    //     calculateRemovePoolValue(inputId, value);
-    //   }, 1000);
+    if(selectedOption === "tokenToETH") {
+      const id = setTimeout(() => {
+        if(tokenAddressOne !== "")
+          getTokenEthAmount(value, inputId);
+      }, 1000);
 
-    //   setTimeoutId(id);
-    // }    
+      setTimeoutId(id);
+    }
   }
 
 
@@ -197,6 +206,13 @@ function Swap() {
     return accounts[0];
   }
 
+  async function getEthBalance() {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const balance = await provider.getBalance(getAccountAddress());
+    const bal = ethers.utils.formatEther(balance);
+    setEthBalance(parseFloat(bal).toFixed(4));
+  }
+
   async function getTokenBalance(tokenAddress, asset) {
     const contract = checkMetamask(Token, tokenAddress);
 
@@ -211,6 +227,15 @@ function Swap() {
     } catch (error) {
       console.log("Error: ", error);
     }
+  }
+
+  async function getContractEthBalance(tokenAddress) { 
+    const exchangeAddress = getExchange(tokenAddress);   
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const contractEthBalance = await provider.getBalance(exchangeAddress);
+      
+    setContractEthBalance(parseFloat(ethers.utils.formatEther(contractEthBalance)).toFixed(5));
+    return ethers.utils.formatEther(contractEthBalance);
   }
 
   async function getExchange(tokenAddress) {
@@ -247,11 +272,10 @@ function Swap() {
 
     const _ethAmount = ethers.utils.parseEther(tokenAmount);
 
-    try {
-      const __ethAmount = await contract.getEthAmount(_ethAmount);
-      return ethers.utils.formatEther(__ethAmount);      
-    } catch (error) {
-    }
+    const __ethAmount = await contract.getEthAmount(_ethAmount);
+    if(tokenAmount === "1")
+      setEthAmount(parseFloat(ethers.utils.formatEther(__ethAmount)).toFixed(5));
+    return ethers.utils.formatEther(__ethAmount);    
   }
 
   async function getTokenAmount(tokenAddress, ethAmount) {
@@ -260,47 +284,59 @@ function Swap() {
 
     const _tokenAmount = ethers.utils.parseEther(ethAmount);
 
-    try {
-      const __tokenAmount = await contract.getTokenAmount(_tokenAmount);
-      return ethers.utils.formatEther(__tokenAmount);
-      // setTokensAmount(tokenAmount.toFixed(5));
-    } catch (error) {
-      // setTokensAmount("0");
-    }
+    const __tokenAmount = await contract.getTokenAmount(_tokenAmount);    
+    return ethers.utils.formatEther(__tokenAmount);
   }
 
   
 
 
 // Token to token ----------------------------------------
-  async function getTokenToTokenPrice() {  
-    const tokenOneReserve = ethers.utils.formatEther(await getReserve(tokenAddressOne, 1));
-    const tokenTwoReserve = ethers.utils.formatEther(await getReserve(tokenAddressTwo, 2));    
+  async function getTokenToTokenPrice() {
+    try {
+      const tokenOneReserve = ethers.utils.formatEther(await getReserve(tokenAddressOne, 1));
+      const tokenTwoReserve = ethers.utils.formatEther(await getReserve(tokenAddressTwo, 2));
+      const ethOneReserve = await getContractEthBalance(tokenAddressOne);
+      const ethTwoReserve = await getContractEthBalance(tokenAddressTwo);
 
-    const tokenOneAmount = (parseFloat("1") * parseFloat(tokenTwoReserve)) / parseFloat(tokenOneReserve);
-    setTokenAmount(parseFloat(tokenOneAmount).toFixed(3));    
+      const ethAmount = (parseFloat("1") * parseFloat(ethOneReserve)) / parseFloat(tokenOneReserve);      
+      const tokenOneAmount = (ethAmount * parseFloat(tokenTwoReserve)) / parseFloat(ethTwoReserve);
+
+      setTokenAmount(parseFloat(tokenOneAmount).toFixed(3));
+    } catch {
+      setTokenAmount(0);
+    }
   }
 
   async function getTokenToTokenAmount(value, inputId) {
     const tokenOneReserve = ethers.utils.formatEther(await getReserve(tokenAddressOne, 1));
     const tokenTwoReserve = ethers.utils.formatEther(await getReserve(tokenAddressTwo, 2)); 
+    const ethOneReserve = await getContractEthBalance(tokenAddressOne);
+    const ethTwoReserve = await getContractEthBalance(tokenAddressTwo);    
+    
 
     if(inputId === 1){
       if(value.toString() === ""){
         setTokenTwoAmount("");
         return;
-      }      
-
-      const tokenTwoAmount = (parseFloat(value) * parseFloat(tokenTwoReserve)) / parseFloat(tokenOneReserve);
-      setTokenTwoAmount(parseFloat(tokenTwoAmount).toFixed(5));
+      }                
+      
+      try {
+        const ethAmount = (parseFloat(value) * parseFloat(ethOneReserve)) / parseFloat(tokenOneReserve);      
+        const tokenTwoAmount = (ethAmount * parseFloat(tokenTwoReserve)) / parseFloat(ethTwoReserve);
+        setTokenTwoAmount(parseFloat(tokenTwoAmount).toFixed(5));
+      } catch(error){}
     } else {
       if(value.toString() === ""){
         setTokenOneAmount("");
         return;
-      }
+      }                  
 
-      const tokenOneAmount = (parseFloat(value) * parseFloat(tokenOneReserve)) / parseFloat(tokenTwoReserve);
-      setTokenOneAmount(parseFloat(tokenOneAmount).toFixed(5));      
+      try {
+        const ethAmount = (parseFloat(value) * parseFloat(ethTwoReserve)) / parseFloat(tokenTwoReserve);
+        const tokenOneAmount = (ethAmount * parseFloat(tokenOneReserve)) / parseFloat(ethOneReserve);
+        setTokenOneAmount(parseFloat(tokenOneAmount).toFixed(5));      
+      } catch(error) {}
     }
   }
 
@@ -339,6 +375,70 @@ function Swap() {
       getTokenToTokenPrice();
   }
 
+
+// ETH <-> token -----------------------------------------
+  async function getTokenEthAmount(value, inputId){
+    if(inputId === 1){
+      if(value.toString() === ""){
+        setTokenTwoAmount("");
+        return;
+      }
+
+      const _ethAmount = await getEthAmount(tokenAddressOne, value); 
+      setTokenTwoAmount(parseFloat(_ethAmount).toFixed(5));
+    } else {
+      if(value.toString() === ""){
+        setTokenOneAmount("");
+        return;
+      }
+
+      const _tokenAmount = await getTokenAmount(tokenAddressOne, value); 
+      setTokenOneAmount(parseFloat(_tokenAmount).toFixed(5));
+    }
+  }
+
+  async function tokenToEthSwap() {
+    const exchangeAddressOne = await getExchange(tokenAddressOne);
+
+    if (typeof window.ethereum !== "undefined"){
+      await requestAccount();
+
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+
+      const contractExchange = new ethers.Contract(exchangeAddressOne, Exchange.abi, signer);
+      const contractToken = new ethers.Contract(tokenAddressOne, Token.abi, signer);
+
+      const tokenValue = ethers.utils.parseEther(tokenOneAmount);
+      const ethValue = ethers.utils.parseEther(tokenTwoAmount);
+
+      const minTokensBought = ethers.utils.parseEther((parseFloat(tokenTwoAmount) * (slippage / 100)).toString());
+      const minEthBought = ethers.utils.parseEther((parseFloat(tokenOneAmount) * (slippage / 100)).toString());
+
+      try {
+        if(isEthSwap){
+          const transaction = await contractExchange.ethToTokenSwap(minEthBought, {value: ethValue});
+          await transaction.wait();
+        } else {
+          await contractToken.approve(contractExchange.address, tokenValue);
+          const transaction = await contractExchange.tokenToEthSwap(tokenValue, minTokensBought);
+          await transaction.wait();
+        }
+                
+        console.log("Swap successfull!!!");
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    }
+
+    getEthBalance();
+    getContractEthBalance(tokenAddressOne);
+    getTokenBalance(tokenAddressOne, 1);
+    getReserve(tokenAddressOne, 1);
+    getEthAmount(tokenAddressOne, "1");
+    setTokenOneAmount("");
+    setTokenTwoAmount("");
+  }
 
 // HTML ------------------------------------------
   useEffect(() => {
@@ -445,17 +545,27 @@ function Swap() {
         {selectedOption === "tokenToETH" && (
           <div>
             <div className="inputs">
-              <Input placeholder="0" value={tokenOneAmount} onChange={(e) => setTokenOneAmount(e.target.value)}/>
-              <Input placeholder="0" value={tokenTwoAmount} disabled={true} />
-              <div className="assetOne" onClick={() => openModal(1)}>
-                {tokenSymbolOne} <DownOutlined />
+              <Input placeholder="0" value={tokenOneAmount} onChange={(event) => handleInputChange(event, 1)}/>
+              <Input placeholder="0" value={tokenTwoAmount} onChange={(event) => handleInputChange(event, 2)}/>              
+              <div className="assetOneBalance">Balance: {tokenBalanceOne}</div>
+              <div className="assetOne" onClick={() => openModal(1)}>{tokenSymbolOne} <DownOutlined /></div>
+              <div className="assetTwoBalance">Balance: {ethBalance}</div>
+              <div className="assetTwo">ETH</div>              
+            </div>
+
+            <div className="poolInfo">
+              <div className="exchangeRate">
+                <div>Exchange Rate</div>
+                <div>1 {tokenSymbolOne} = {ethAmount} ETH</div>
               </div>
 
-              <div className="assetTwo" onClick={() => openModal(2)}>
-                {tokenSymbolTwo} <DownOutlined />
+              <div className="poolSize">
+                <div>Current Pool Size</div>
+                <div>{contractTokenBalanceOne} {tokenSymbolOne} + {contractEthBalance} ETH</div>
               </div>
             </div>
-            <div className="swapButton" onClick={getAllTokenAddresses}>ETH Swap</div>
+
+            <div className="swapButton" onClick={tokenToEthSwap}>ETH Swap</div>
           </div>
         )}
 

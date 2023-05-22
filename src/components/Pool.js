@@ -534,6 +534,9 @@ function Pool() {
     }
   }
 
+
+
+
   useEffect(() => {
     async function fetchData() {
       const symbols = await Promise.all(
@@ -616,11 +619,6 @@ function Pool() {
             <div className="assetTwoBalance">Balance: {ethBalance}</div>
             <div className="assetTwo">ETH</div>
             <div className="poolInfo">
-              <div className="exchangeRate">
-                <div>Exchange Rate</div>
-                <div>1 ETH = {tokensAmount} {tokenSymbol}</div>
-              </div>
-
               <div className="poolSize">
                 <div>Current Pool Size</div>
                 <div>{contractEthBalance} ETH + {contractTokenBalance}{" "}{tokenSymbol}</div>

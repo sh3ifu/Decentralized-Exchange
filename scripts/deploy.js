@@ -18,10 +18,12 @@ function writeToFile(filename, data){
 
 async function main() {
   const decimals = BigInt(10 ** 18);
-  const tokenContractAddress = await deployContract("Token", "Shiba Inu", "SHIB", 1000000n * decimals);
-  // const factoryContractAddress = await deployContract("Factory");
+  const tokenContractAddress = await deployContract("Token", "Suraynded Pip", "SRP", 5000n * decimals);
+  const tokenContractAddress1 = await deployContract("Token", "GalaxySwap Token", "GLX", 5000n * decimals);
+  const tokenContractAddress2 = await deployContract("Token", "Chain Link", "Link", 5000n * decimals);
+  const factoryContractAddress = await deployContract("Factory");
 
-  // writeToFile('./src/components/deployedContractsAddresses.json', { factoryContractAddress:  factoryContractAddress});
+  writeToFile('./src/components/deployedContractsAddresses.json', { factoryContractAddress:  factoryContractAddress});
 }
 
 main().catch((error) => {

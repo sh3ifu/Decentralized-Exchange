@@ -56,10 +56,7 @@ function Header() {
         </Link>
         <Link to="/pool" className="link">
           <div className="headerItem">Pool</div>
-        </Link>
-        <Link to="/staking" className="link">
-          <div className="headerItem">Staking</div>
-        </Link>
+        </Link>        
         <Link to="/lottery" className="link">
           <div className="headerItem">Lottery</div>
         </Link>
