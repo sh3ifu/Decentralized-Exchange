@@ -352,7 +352,7 @@ function Swap() {
       const contractExchange = new ethers.Contract(exchangeAddressOne, Exchange.abi, signer);
       const contractToken = new ethers.Contract(tokenAddressOne, Token.abi, signer);
 
-      const tokenOneValue = ethers.utils.parseEther(tokenOneAmount);      
+      const tokenOneValue = ethers.utils.parseEther(tokenOneAmount);
 
       const minTokensBought = ethers.utils.parseEther((parseFloat(tokenTwoAmount) * (slippage / 100)).toString());      
       await contractToken.approve(contractExchange.address, tokenOneValue);

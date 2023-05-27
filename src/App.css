@@ -3,12 +3,13 @@
 }
 
 header {
-  height: 100px;
+  height: 75px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-left: 50px;
   padding-right: 50px;
+  background-color: #C9A66B;
 }
 
 .logo{
@@ -48,7 +49,7 @@ header {
 }
 
 .headerItem:hover {
-  background-color: rgb(201, 166, 107);
+  background-color: #7D5E3C;
   cursor: pointer;
 }
 
@@ -66,6 +67,23 @@ header {
 .connectButton:hover {
   cursor: pointer;
   color: #662E1C
+}
+
+.clmrPrice {
+  padding-right: 20px;
+}
+
+.clmr {
+  width: 25px;
+  height: 25px;
+  padding-right: 10px;
+}
+
+.headerLine {
+  width: 100%;  
+  margin-top: -1px;
+  height: 2px;
+  background-color: #C68E17;
 }
 
 
@@ -92,7 +110,7 @@ header {
 
 
 .mainWindow {
-  margin-top: 40px;
+  margin-top: 60px;
   display: flex;
   justify-content: center;
 }
@@ -100,7 +118,9 @@ header {
 .link {
   text-decoration: none;
   color: white;
+  /* color: red; */
 }
+
 
 .tradeBox, .poolBox {
   width: 400px;
@@ -114,6 +134,7 @@ header {
   align-items: flex-start;
   padding-left: 30px;
   padding-right: 30px;
+  padding-top: 10px;
 }
 
 

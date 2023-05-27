@@ -1,1 +1,6 @@
-{"factoryContractAddress":"0x6820b72ae6a90375215496a330CDfCCF08456476"}
+{
+    "factoryContractAddress":"0x6820b72ae6a90375215496a330CDfCCF08456476",
+    "cotteryFactoryContractAddress": "0xfb6Db944AB93070Fb5AEf7602fDAd143614Df324",
+    "caramelTokenAddress": "0xBE648D36018B91f92Ac6C3Ff2874AaDA4323a98a",
+    "deploymentPrivateKey": "0x88c8a3934c756d5072ea73160ed2567d45fad1cfae1b61d4a9aabae9985501a7"
+}

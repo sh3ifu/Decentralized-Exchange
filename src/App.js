@@ -1,7 +1,7 @@
 import Header from "./components/Header";
 import Swap from "./components/Swap";
 import Pool from "./components/Pool";
-import Lottery from "./components/Lottery";
+import Cottery from "./components/Cottery";
 import GitHub from "./github_logo.png";
 import LinkedIn from "./linkedin_logo.png";
 import { Routes, Route } from "react-router-dom";
@@ -11,11 +11,12 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <div className="headerLine"></div>
       <div className="mainWindow">
         <Routes>
           <Route path="/" element={<Swap />} />
           <Route path="/pool" element={<Pool />} />          
-          <Route path="/lottery" element={<Lottery />} />
+          <Route path="/cottery" element={<Cottery />} />
         </Routes>
       </div>
       

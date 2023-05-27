@@ -1,0 +1,78 @@
+.lotteryBox {
+  width: 400px;
+  background-color: #c9a66b;
+  border: 2px solid #21273a;
+  min-height: 300px;
+  border-radius: 15px;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start; */
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.lotteryBoxHeader {
+  /* display: flex; */
+  justify-content: space-between;
+  /* align-items: center; */
+  width: 98%;
+}
+
+.lotteryTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.lotteryTitle h2 {
+  margin-bottom: 0;
+  color: #662e1c;
+}
+
+.lotteryTitle .flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: -10px;
+}
+
+.lotteryTitle .flex-container p {
+  margin: 0;
+}
+
+.flex-container {
+  color: #ffecbb;
+}
+
+.lotteryTitle .caramel_ico {
+  width: 40px;
+  height: 40px;
+  margin-right: -20px;
+}
+
+.line {
+  width: 460px;
+  margin-left: -30px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  height: 0.5px;
+  background-color: #ddc5a2;
+}
+
+.lotteryInfo {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.textInfo {
+    color: #ffecbb;
+}
+.countInfo {
+    color: #662e1c;
+}
