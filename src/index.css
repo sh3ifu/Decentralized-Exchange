@@ -7,12 +7,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
   width: 100vw;
-  background-color: rgb(25, 33, 52) !important;
-  background: rgb(25, 33, 52);
+  background-color: rgb(#FFECBB) !important;
+  background: rgb(#FFECBB);
   background: linear-gradient(
     180deg,
-    rgba(25, 33, 52, 1) 28%,
-    rgba(7, 8, 21, 1) 75%
+    rgba(235, 220, 178, 1) 28%,
+    rgba(234, 211, 156, 1) 75%
   );
   color: white;
 }
@@ -22,9 +22,9 @@ code {
     monospace;
 }
 
-.ant-input {
-  background-color: #1f2639 !important;
-  color: white !important;
+.ant-input {  
+  background-color: #FFD59F !important;  
+  color: #662E1C !important;
   border-width: 0px !important;
   height: 96px !important;
   margin-bottom: 5px;
@@ -33,7 +33,7 @@ code {
 }
 
 .ant-input::placeholder {
-  color: #5f6783 !important;
+  color: #662E1C !important;
 }
 
 .ant-popover-arrow {
@@ -41,18 +41,18 @@ code {
 }
 
 .ant-popover-title {
-  color: white !important;
+  color: #662E1C !important;
 }
 
 .ant-popover-inner-content {
-  color: white !important;
+  color: #662E1C !important;
 }
 
 .ant-popover-inner {
   min-width: 260px !important;
   min-height: 140px !important;
   border: 1px solid #21273a;
-  background-color: #0e111b !important;
+  background-color: #EBDCB2 !important;
 }
 
 .ant-radio-group {
@@ -60,23 +60,27 @@ code {
 }
 
 .ant-radio-button-wrapper {
-  background-color: #1f2639 !important;
-  color: white !important;
+  background-color: #7D5E3C !important;
+  color: #DDC5A2 !important;
   font-weight: 500;
-  border-color: white !important;
+  border-color: #21273a !important;
 }
 
 .ant-radio-button-wrapper-checked {
-  border-color: white !important;
-  background-color: #363e54 !important;
+  border-color: #21273a !important;
+  background-color: #EAD39C !important;
+  color: #662E1C !important;
+  
 }
 
 .ant-radio-button-wrapper-checked::before {
   background-color: white !important;
 }
 
+
+
 .ant-modal-content {
-  background-color: #0e111b !important;
+  background-color: #EAD39C !important;
   color: white !important;
   padding: 0px !important;
 }
@@ -88,7 +92,7 @@ code {
 }
 
 .ant-modal-header {
-  background-color: #0e111b !important;
+  background-color: #EAD39C !important;
 }
 
 .ant-modal-title {
@@ -98,7 +102,7 @@ code {
 }
 
 .ant-modal-close-icon {
-  color: #363e54 !important;
+  color: #662E1C !important;
   transition: 0.3s;
 }
 

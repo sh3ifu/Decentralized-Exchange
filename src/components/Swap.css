@@ -6,8 +6,8 @@
     width: 170px;
     height: 40px;
     padding: 10px 25px;
-    border: 2px solid #5981F3;
-    color:#5981F3;
+    border: 2px solid #662E1C;
+    color:#662E1C;
     background: #3b4874;
     font-family: 'Lato', sans-serif;
     font-weight: 600;
@@ -19,7 +19,6 @@
     margin-top: 10px;
     margin-bottom: 15px;
     margin-left: 10px;
-    /* margin-right: 15px; */
     border-radius: 12px;    
   }
 
@@ -28,8 +27,8 @@
     transition: all 0.3s ease;
   }
   .swap-control-btn:hover {
-    background: #3b4874;
-    color: #5982f39b;
+    background: #DDC5A2;
+    color: #523634;
   }
   .swap-control-btn:before {
       position: absolute;

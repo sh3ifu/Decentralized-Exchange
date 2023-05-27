@@ -16,16 +16,16 @@
     margin-bottom: 15px;
   }
 
-  .assetOneBalance, .assetTwoBalance {
-    color: #D4DBE2;
+  .assetOneBalance, .assetTwoBalance {    
+    color: #C68E17;
   }
 
   .pool-control-btn {        
     width: 120px;
     height: 40px;
     padding: 10px 25px;
-    border: 2px solid #5981F3;
-    color:#5981F3;
+    border: 2px solid #662E1C;
+    color:#662E1C;
     background: #3b4874;
     font-family: 'Lato', sans-serif;
     font-weight: 600;
@@ -45,8 +45,8 @@
     transition: all 0.3s ease;
   }
   .pool-control-btn:hover {
-    background: #3b4874;
-    color: #5982f39b;
+    background: #DDC5A2;
+    color: #523634;
   }
   .pool-control-btn:before {
       position: absolute;

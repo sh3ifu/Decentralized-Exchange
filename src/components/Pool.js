@@ -146,7 +146,7 @@ function Pool() {
     try {
       const balance = await contract.balanceOf(getAccountAddress());
       const bal = ethers.utils.formatEther(balance);
-      setTokenBalance(bal);
+      setTokenBalance(parseFloat(bal).toFixed(4));
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -181,7 +181,7 @@ function Pool() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const contractEthBalance = await provider.getBalance(exchangeAddress);
 
-    setContractEthBalance(ethers.utils.formatEther(contractEthBalance));
+    setContractEthBalance(parseFloat(ethers.utils.formatEther(contractEthBalance)).toFixed(4));
     return ethers.utils.formatEther(contractEthBalance);
   }
 
@@ -202,7 +202,7 @@ function Pool() {
 
     try {
       const reserve = await contract.getReserve();
-      setContractTokenBalance(ethers.utils.formatEther(reserve));
+      setContractTokenBalance(parseFloat(ethers.utils.formatEther(reserve)).toFixed(4));
       return reserve;
     } catch (error) {
       console.log("Error: ", error);
@@ -382,18 +382,6 @@ function Pool() {
 
 
   // Remove Liquidity ------------------------------------------
-  // async function getLpTokenBalance() {
-  //   const exchangeAddress = getExchange(tokenAddress);
-  //   const contract = checkMetamask(Exchange, exchangeAddress);
-
-  //   try {
-  //     const _lpBalance = await contract.balanceOf(getAccountAddress());
-  //     const lpBalance = ethers.utils.formatEther(_lpBalance);      
-  //     return lpBalance;
-  //   } catch (error) {
-  //     console.log("Error: ", error);
-  //   }
-  // }
 
   async function getTotalSupply() {
     const exchangeAddress = getExchange(tokenAddress);

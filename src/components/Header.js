@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import Logo from "../galaxy_logo.png";
+import React, { useState, useEffect } from "react";
+import Logo from "../chocolate_logo.png";
 import Eth from "../ethereum.png";
 import { Link } from "react-router-dom";
 import { ethers } from "ethers";
 
 function Header() {
   const [walletAddress, setWalletAddress] = useState("");
+  const [isWalletConnect, setIsWalletConnect] = useState(false);
 
   async function requestAccount() {
     console.log("Requesting account...");
@@ -30,19 +31,9 @@ function Header() {
       await requestAccount();
 
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-      return provider;
-    }
-  }
-
-  function isMetamaskConnected() {
-    if (typeof window.ethereum !== "undefined") {
-      if (window.ethereum.selectedAddress) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      alert("Metamask is not installed");
+      const signer = provider.getSigner();
+      signer.getAddress().then((address) => { setWalletAddress(address); });
+      setIsWalletConnect(true);
     }
   }
 
@@ -50,7 +41,7 @@ function Header() {
     <header>
       <div className="leftH">
         <img src={Logo} alt="logo" className="logo" />
-        <h1 className="dex-name">Galaxy Swap</h1>
+        <h1 className="dex-name">Caramel Swap</h1>
         <Link to="/" className="link">
           <div className="headerItem">Swap</div>
         </Link>
@@ -67,8 +58,8 @@ function Header() {
           <img src={Eth} alt="eth" className="eth" />
           Ethereum
         </div>
-        <div className="connectButton" onClick={requestAccount}>
-          {isMetamaskConnected ? walletAddress.slice(0, 4) + "..." + walletAddress.slice(38) : "Connect"}
+        <div className="connectButton" onClick={connectWallet}>
+          {isWalletConnect ? walletAddress.slice(0, 4) + "..." + walletAddress.slice(38) : "Connect"}
         </div>
       </div>
     </header>
