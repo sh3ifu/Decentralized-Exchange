@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# Links
+[Video](https://youtu.be/_w87HMNmPAA)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# User interface
+Main page of the site
 
-## Available Scripts
+![Env file example](/screenshots/mainPage.png)
+In the main part of the page there is a window for exchanging tokens. At the top of the window you can see two buttons for exchanging **ERC20 ↔ ERC20** and **ERC20 ↔ ETH** respectively.
 
-In the project directory, you can run:
+By clicking on the corresponding element (with a white arrow down), the user will see a modal window where he can choose the one he needs from the list of tokens.
 
-### `npm start`
+![Env file example](/screenshots/selectingTokens.png)
+This window displays both the name of the token and the address of its contract. This is necessary in order to distinguish tokens that have the same name.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+After selecting two tokens and entering the required amount for exchange, the following information is displayed:
+1. Balance of tokens in the wallet. Located next to the token selection menu.
+2. After entering the number of tokens in one of the fields, the corresponding number of another token will be displayed in the other, which the user will receive for exchange at the specified rate.
+3. Above the exchange button, gray text shows information about the exchange rate for these tokens, as well as the amount of liquidity in the pool.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![Env file example](/screenshots/exchangeWindow.png)
 
-### `npm test`
+On the **Pool** page, the global interface does not change much. In the center is the same window, only there are three buttons for selection: **Add**, **Remove** and **Create**. Accordingly, to add liquidity, withdraw and create a new exchange contract for a new token.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Env file example](/screenshots/poolPage.png)
 
-### `npm run build`
+Adding liquidity.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Env file example](/screenshots/addingLiquidity.png)
+You can see that there are already some assets in this liquidity pool, so when the user wants to add more of his assets to this pool, he cannot do it arbitrarily. The pool itself calculates in what ratio tokens and ether should be added. If there was no liquidity in this pool, then the user could add any number of the first and second assets.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+You can see the auction window on the **Cottery** page. In the input field, users will enter the size of the bets they want to place.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Env file example](/screenshots/cotteryPage.png)
 
-### `npm run eject`
+# User instructions
+#### Technologies used
+![Env file example](/screenshots/usedTechnologies.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To start the project, you need to install the following software tools:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Node.js
+- Solidity
+- React
+- Ganache
+- Metamask
+- Ethers.js
+- Hardhat
+- Text editor and web-browser.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Having installed all the necessary software tools, the next thing you need to do is download the project from GitHub and unpack it on your local machine.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The next step to start the project, the user needs to perform a number of actions:
+1. Open the project in the code editor.
+2. Install all necessary dependencies via the **node.js** npm package manager.
+3. Launch the local **Ganache** blockchain.
+4. Specify the necessary variables in the **.env** file. That is, the private key to the address in the Ethereum network from which smart contracts will be deployed, as well as **localhost** addresses.
 
-## Learn More
+![Env file example](/screenshots/envFileExample.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+5. Make the necessary settings in the **hardhat.config.js** file. They are required for the proper operation of the **Hardhat** tool, that is, for the deployment of smart contracts in the selected blockchain network, as well as for testing.
+6. Next, from the **scripts** directory, you need to run the deploy.js file, which is responsible for deploying contracts to the blockchain. This can be done using the command: **npx hardhat run .\scripts\deploy.js –network localganache**, where you need to specify the path to the **deploy.js** file and the name of the local blockchain network (it was specified in the **hardhat.config.js** file).
+7. The next step is to go to the **src/components** directory and in the **deployedContractsAddresses.json** file, in the **deploymentPrivateKey** field, specify the same address that was specified in the **.env** file.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![Env file example](/screenshots/deployedContractExample.png)
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+8. After that, you need to enter the **npm start** command in the terminal to start the project itself.
+9. After opening a web page in a browser on the local host, the user first needs to connect his **Metamask** crypto wallet to the exchange, and only then can it be used.
